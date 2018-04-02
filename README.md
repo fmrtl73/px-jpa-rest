@@ -31,6 +31,22 @@ Use helm to deploy Postgres and pass in the storage class name
 
 `helm install --name px-psql --set postgresUser=postgres,postgresPassword=password,persistence.storageClass=px-repl3-sc stable/postgresql`
 
+Create the people database
+
+`kubectl exec -it <postgres database pod> /bin/sh`
+
+`psql`
+
+`create database people`
+
 Deploy rest api
 
 `kubectl create -f k8s-yaml/jpa-deploy.yaml`
+
+Get the svc IP
+
+`kubectl get svc`
+
+Create a record using curl
+
+`curl -i -X POST -H "Content-Type:application/json" -d "{\"firstName\": \"Francois\",\"lastName\": \"Martel\",\"address\": {\"line1\": \"465 Washington\",\"line2\": \"apt-3425\",\"city\": \"Kansas\",\"state\": \"Texas\",\"zipcode\": \"03452\"}}" http://<SERVIC_IP>:8080/people`

@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: Always
           name: jpa-rest-api
           env:
-            - name: spring_active_profile
+            - name: spring_profiles_active
               value: prod
           ports:
             - containerPort: 8080
