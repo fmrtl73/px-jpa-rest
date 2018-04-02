@@ -9,9 +9,12 @@
 
 `docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres`
 
+Start the client container and create the people database
 `docker run -it --rm --link some-postgres:postgres postgres psql -h postgres -U postgres`
 
 `create database people;`
+
+Run the rest api and create a record
 
 `java -jar target/px-jpa-rest-0.1.0.jar --spring.profiles.active=dev`
 
