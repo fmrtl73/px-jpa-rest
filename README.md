@@ -35,9 +35,15 @@ Create the people database
 
 `kubectl exec -it <postgres database pod> /bin/sh`
 
+Once in the container shell launch a psql session:
+
 `psql`
 
-`create database people`
+From psql create the people database:
+
+`create database people;`
+
+Exit the shell.
 
 Deploy rest api
 
