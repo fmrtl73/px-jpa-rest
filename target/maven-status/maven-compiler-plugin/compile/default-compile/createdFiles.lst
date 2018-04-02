@@ -1,0 +1,4 @@
+px/rest/apis/jpa/Address.class
+px/rest/apis/jpa/Application.class
+px/rest/apis/jpa/Person.class
+px/rest/apis/jpa/PersonRepository.class
