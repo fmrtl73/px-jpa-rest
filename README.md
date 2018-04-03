@@ -1,8 +1,8 @@
 ### Build
-```
-./mvnw clean package
-./mvnw install dockerfile:build
-docker push fmrtl73/px-jpa-rest
+```console
+user@host:~/px-jpa-rest$ ./mvnw clean package
+user@host:~/px-jpa-rest$ ./mvnw install dockerfile:build
+user@host:~/px-jpa-rest$ docker push fmrtl73/px-jpa-rest
 ```
 
 ### Test locally with with curl
