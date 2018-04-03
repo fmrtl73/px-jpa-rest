@@ -15,6 +15,7 @@ Start the client container and create the people database
 ```console
 user@host:~/px-jpa-rest$ docker run -it --rm --link some-postgres:postgres postgres psql -h postgres -U postgres
 create database people;
+\q
 ```
 
 Run the rest api and create a record
