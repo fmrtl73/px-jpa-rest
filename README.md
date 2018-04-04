@@ -68,9 +68,9 @@ user@host:~/px-jpa-rest$ ETCD_HOST_URL=192.168.56.70:2379
 ```
 Create a repliced deployment of Postgres using Patroni helm chart
 ```console
-user@host:~/px-jpa-rest$ kubectl create -f k8s-yaml/px-repl3-sc.yaml
+user@host:~/px-jpa-rest$ kubectl create -f k8s-yaml/px-repl2-sc.yaml
 user@host:~/px-jpa-rest$ helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
-user@host:~/px-jpa-rest$ helm install --name px --set persistentVolume.storageClass=px-repl3-sc,Etcd.Host=$ETCD_HOST_URL,Etcd.DeployChart=false,Replicas=3 incubator/patroni
+user@host:~/px-jpa-rest$ helm install --name px --set persistentVolume.storageClass=px-repl2-sc,Etcd.Host=$ETCD_HOST_URL,Etcd.DeployChart=false,Replicas=3 incubator/patroni
 ```
 Deploy the rest api
 ```console
