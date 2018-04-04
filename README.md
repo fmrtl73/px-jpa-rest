@@ -58,3 +58,28 @@ user@host:~/px-jpa-rest$ PSQL_SERVICE_IP=`kubectl get svc | grep jpa-rest-api | 
 user@host:~/px-jpa-rest$ curl -i -X POST -H "Content-Type:application/json" -d "{\"firstName\": \"Francois\",\"lastName\": \"Martel\",\"address\": {\"line1\": \"465 Washington\",\"line2\": \"apt-3425\",\"city\": \"Kansas\",\"state\": \"Texas\",\"zipcode\": \"03452\"}}" http://$PSQL_SERVICE_IP:8080/people
 user@host:~/px-jpa-rest$ curl http://$PSQL_SERVICE_IP:8080/people
 ```
+
+### Test with Kubernetes and Statefulset
+
+Find out and set your ETCD_HOST_URL
+```console
+ETCD_HOST_URL=192.168.56.70:2379
+```
+Create a repliced deployment of Postgres using Patroni helm chart
+```console
+user@host:~/px-jpa-rest$ kubectl create -f k8s-yaml/px-repl3-sc.yaml
+user@host:~/px-jpa-rest$ helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
+user@host:~/px-jpa-rest$ helm install --name px --set persistentVolume.storageClass=px-repl3-sc,Etcd.Host=$ETCD_HOST_URL,Etcd.DeployChart=false,Replicas=3 incubator/patroni
+```
+Deploy the rest api
+```console
+user@host:~/px-jpa-rest$ kubectl create -f k8s-yaml/jpa-deploy-patroni.yaml
+```
+
+Get the svc IP and curl some data
+
+```console
+user@host:~/px-jpa-rest$ PSQL_SERVICE_IP=`kubectl get svc | grep jpa-rest-api | awk '{print $3}'`
+user@host:~/px-jpa-rest$ curl -i -X POST -H "Content-Type:application/json" -d "{\"firstName\": \"Francois\",\"lastName\": \"Martel\",\"address\": {\"line1\": \"465 Washington\",\"line2\": \"apt-3425\",\"city\": \"Kansas\",\"state\": \"Texas\",\"zipcode\": \"03452\"}}" http://$PSQL_SERVICE_IP:8080/people
+user@host:~/px-jpa-rest$ curl http://$PSQL_SERVICE_IP:8080/people
+```
