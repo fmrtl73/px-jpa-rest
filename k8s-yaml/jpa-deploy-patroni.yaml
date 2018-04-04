@@ -37,5 +37,11 @@ spec:
           env:
             - name: spring_profiles_active
               value: prod
+            - name: spring_datasource_url
+              value: jdbc:postgresql://px-patroni/people
+            - name: spring_datasource_username
+              value: postgres
+            - name: spring_datasource_password
+              value: tea
           ports:
             - containerPort: 8080
