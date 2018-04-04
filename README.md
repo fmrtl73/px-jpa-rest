@@ -61,9 +61,10 @@ user@host:~/px-jpa-rest$ curl http://$PSQL_SERVICE_IP:8080/people
 
 ### Test with Kubernetes and Statefulset
 
-Find out and set your ETCD_HOST_URL
+Find out and set your ETCD_HOST_URL, you can also have the patroni chart deploy etcd for you by removing the Etcd.Host=$ETCD_HOST_URL and Etcd.DeployChart=false settings in the helm command below. There is no way to set the storage class for the Patroni deployed ETCD however, which is why pointing to an existing ETCD may be required.
+
 ```console
-ETCD_HOST_URL=192.168.56.70:2379
+user@host:~/px-jpa-rest$ ETCD_HOST_URL=192.168.56.70:2379
 ```
 Create a repliced deployment of Postgres using Patroni helm chart
 ```console
