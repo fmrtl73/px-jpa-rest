@@ -41,14 +41,14 @@ user@host:~/px-jpa-rest$ helm install --name px-psql --set postgresUser=postgres
 Create the people database
 ```console
 user@host:~/px-jpa-rest$ PGPASSWORD=$(kubectl get secret --namespace default px-psql-postgresql -o jsonpath="{.data.postgres-password}" | base64 --decode; echo)
-user@host:~/px-jpa-rest$ kubectl run --namespace default px-psql-postgresql-client --restart=Never --rm --tty -i --image postgres --env "PGPASSWORD=$PGPASSWORD" --command -- psql -U postgres -h px-psql2-postgresql postgres
+user@host:~/px-jpa-rest$ kubectl run --namespace default px-psql-postgresql-client --restart=Never --rm --tty -i --image postgres --env "PGPASSWORD=$PGPASSWORD" --command -- psql -U postgres -h px-psql-postgresql postgres
 create database people;
 \q
 ```
 Deploy rest api
 
 ```console
-user@host:~/px-jpa-rest$ kubectl create -f k8s-yaml/jpa-deploy.yaml
+user@host:~/px-jpa-rest$ kubectl create -f k8s-yaml/psql.yaml
 ```
 
 Get the svc IP and curl some data
@@ -74,7 +74,7 @@ user@host:~/px-jpa-rest$ helm install --name px --set persistentVolume.storageCl
 ```
 Deploy the rest api
 ```console
-user@host:~/px-jpa-rest$ kubectl create -f k8s-yaml/jpa-deploy-patroni.yaml
+user@host:~/px-jpa-rest$ kubectl create -f k8s-yaml/patroni.yaml
 ```
 
 Get the svc IP and curl some data
