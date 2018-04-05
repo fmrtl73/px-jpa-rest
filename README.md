@@ -40,8 +40,8 @@ user@host:~/px-jpa-rest$ helm install --name px-psql --set postgresUser=postgres
 
 Create the people database
 ```console
-user@host:~/px-jpa-rest$ PGPASSWORD=$(kubectl get secret --namespace default px-psql2-postgresql -o jsonpath="{.data.postgres-password}" | base64 --decode; echo)
-user@host:~/px-jpa-rest$ kubectl run --namespace default px-psql2-postgresql-client --restart=Never --rm --tty -i --image postgres --env "PGPASSWORD=$PGPASSWORD" --command -- psql -U postgres -h px-psql2-postgresql postgres
+user@host:~/px-jpa-rest$ PGPASSWORD=$(kubectl get secret --namespace default px-psql-postgresql -o jsonpath="{.data.postgres-password}" | base64 --decode; echo)
+user@host:~/px-jpa-rest$ kubectl run --namespace default px-psql-postgresql-client --restart=Never --rm --tty -i --image postgres --env "PGPASSWORD=$PGPASSWORD" --command -- psql -U postgres -h px-psql2-postgresql postgres
 create database people;
 \q
 ```
