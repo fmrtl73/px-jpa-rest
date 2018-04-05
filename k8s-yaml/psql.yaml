@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: jpa-rest-api
   labels:
-    app: px-jpa-rest
+    app: jpa-rest-api
 spec:
   ports:
     - port: 8081
@@ -20,7 +20,7 @@ kind: Deployment
 metadata:
   name: jpa-rest-api
   labels:
-    app: px-jpa-rest
+    app: jpa-rest-api
 spec:
   strategy:
     type: Recreate
