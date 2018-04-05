@@ -7,13 +7,13 @@ metadata:
     app: px-jpa-rest
 spec:
   ports:
-    - port: 8080
+    - port: 8081
       protocol: TCP
-      targetPort: 8080
+      targetPort: 8081
   selector:
     app: jpa-rest-api
     tier: compute
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -38,4 +38,4 @@ spec:
             - name: spring_profiles_active
               value: prod
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
