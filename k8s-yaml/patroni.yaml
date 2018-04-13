@@ -39,7 +39,7 @@ spec:
             - name: spring_profiles_active
               value: prod
             - name: spring_datasource_url
-              value: jdbc:postgresql://px-patroni.default.svc.cluster.local/people
+              value: jdbc:postgresql://px-patroni.default.svc.cluster.local/people?sslmode=require
             - name: spring_datasource_username
               value: postgres
             - name: spring_datasource_password
