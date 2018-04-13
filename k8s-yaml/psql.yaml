@@ -7,9 +7,9 @@ metadata:
     app: jpa-rest-api
 spec:
   ports:
-    - port: 8081
+    - port: 8080
       protocol: TCP
-      targetPort: 8081
+      targetPort: 8080
   selector:
     app: jpa-rest-api
     tier: compute
@@ -22,6 +22,7 @@ metadata:
   labels:
     app: jpa-rest-api
 spec:
+  replicas: 3
   strategy:
     type: Recreate
   template:
@@ -38,4 +39,4 @@ spec:
             - name: spring_profiles_active
               value: prod
           ports:
-            - containerPort: 8081
+            - containerPort: 8080
